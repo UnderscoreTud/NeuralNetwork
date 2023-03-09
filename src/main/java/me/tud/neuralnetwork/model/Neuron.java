@@ -1,12 +1,10 @@
 package me.tud.neuralnetwork.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Neuron implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1093856207263835942L;
 
     private final NeuralNetwork network;

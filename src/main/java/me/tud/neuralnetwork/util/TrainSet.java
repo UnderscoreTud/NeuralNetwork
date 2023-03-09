@@ -1,14 +1,13 @@
 package me.tud.neuralnetwork.util;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 public class TrainSet implements Iterable<DataPair>, Serializable {
 
-    @Serial
     private static final long serialVersionUID = 6969851092691793249L;
 
     private final List<DataPair> data = new ArrayList<>();
@@ -41,7 +40,7 @@ public class TrainSet implements Iterable<DataPair>, Serializable {
 
     @Override
     public Iterator<DataPair> iterator() {
-        return List.copyOf(data).iterator();
+        return Collections.unmodifiableList(data).iterator();
     }
 
     public List<DataPair> getData() {

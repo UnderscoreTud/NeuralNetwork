@@ -2,14 +2,17 @@ package me.tud.neuralnetwork.model;
 
 import me.tud.neuralnetwork.util.DataPair;
 import me.tud.neuralnetwork.util.TrainSet;
-import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.nio.file.Files;
 
 public class NeuralNetwork implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1914115072288484963L;
 
     private final int inputSize;
@@ -96,7 +99,7 @@ public class NeuralNetwork implements Serializable {
     public void save(@NotNull File targetFile) throws IOException {
         if (!targetFile.exists() && !targetFile.createNewFile())
             throw new IOException("Could not create file at '" + targetFile.getPath() + '\'');
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(targetFile))) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(Files.newOutputStream(targetFile.toPath()))) {
             outputStream.writeObject(this);
         }
     }
@@ -106,7 +109,7 @@ public class NeuralNetwork implements Serializable {
             throw new IOException("Could not find file at '" + targetFile.getPath() + '\'');
         if (!targetFile.exists())
             throw new IOException("Could not find file at '" + targetFile.getPath() + '\'');
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(targetFile))) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(Files.newInputStream(targetFile.toPath()))) {
             Object object = inputStream.readObject();
             if (object instanceof NeuralNetwork)
                 return (NeuralNetwork) object;
