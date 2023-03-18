@@ -59,4 +59,21 @@ public class TrainSet implements Iterable<DataPair>, Serializable {
         return data.size();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("[\n");
+        int i = 0;
+        for (DataPair pair : data)
+            builder.append('\t').append(++i).append(". ").append(pair).append('\n');
+        builder.append(']');
+        return builder.toString();
+    }
+
+    public static TrainSet of(double[][] data) {
+        TrainSet trainSet = new TrainSet(data[0].length, data[1].length);
+        for (int i = 0; i < data.length; i += 2)
+            trainSet.addData(data[i], data[i + 1]);
+        return trainSet;
+    }
+
 }

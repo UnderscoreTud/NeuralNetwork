@@ -1,6 +1,7 @@
 package me.tud.neuralnetwork.util;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class DataPair implements Serializable {
 
@@ -19,6 +20,19 @@ public class DataPair implements Serializable {
 
     public double[] getOutput() {
         return output;
+    }
+
+    public int getInputSize() {
+        return input.length;
+    }
+
+    public int getOutputSize() {
+        return output.length;
+    }
+
+    @Override
+    public String toString() {
+        return "Input: " + Arrays.toString(input) + ", Output: " + Arrays.toString(output);
     }
 
 }
